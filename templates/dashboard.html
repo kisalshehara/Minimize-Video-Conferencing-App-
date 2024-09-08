@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .meeting {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 5px solid #007bff;
+        }
+        .meeting h3 {
+            margin: 0;
+        }
+        .meeting p {
+            margin: 5px 0;
+            color: #555;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Dashboard</h2>
+        {% for meeting in meetings %}
+        <div class="meeting">
+            <h3>{{ meeting.title }}</h3>
+            <p>Time: {{ meeting.time }}</p>
+            <p><a href="{{ url_for('meeting_room', meeting_id=meeting.id) }}">Join Meeting</a></p>
+        </div>
+        {% else %}
+        <p>No scheduled meetings</p>
+        {% endfor %}
+        <p><a href="{{ url_for('schedule_meeting') }}">Schedule New Meeting</a></p>
+    </div>
+</body>
+</html>
